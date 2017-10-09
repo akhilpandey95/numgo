@@ -1,0 +1,6 @@
+# go test files
+test.go
+modules/main.go
+modules/test.go
+modules/*/main.go
+modules/*/test.go
