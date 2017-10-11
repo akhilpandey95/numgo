@@ -1,6 +1,5 @@
 # go test files
 test.go
-modules/main.go
-modules/test.go
-modules/*/main.go
-modules/*/test.go
+main.go
+*/test.go
+*/main.go
