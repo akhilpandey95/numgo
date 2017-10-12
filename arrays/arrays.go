@@ -4,7 +4,7 @@
 *  https://github.com/AkhilHector/pubundsci/blob/master/LICENSE.
  */
 
-package numGo
+package numgo
 
 type NdArray struct {
 	Size int
@@ -13,6 +13,16 @@ type NdArray struct {
 func (n NdArray) Init() []int {
 	array := make([]int, n.Size)
 	return array
+}
+
+func extract_parameters(args []int) []int {
+	var parameters []int
+
+	// store the parameters in a list
+	for _, p := range args {
+		parameters = append(parameters, p)
+	}
+	return parameters
 }
 
 func (n NdArray) Range(start, end int) []int {
@@ -25,13 +35,8 @@ func (n NdArray) Range(start, end int) []int {
 
 func (n NdArray) Xrange(args ...int) []int {
 	var array []int
-	var parameters []int
 	number_of_args := len(args)
-
-	// store the parameters in a slice
-	for _, p := range args {
-		parameters = append(parameters, p)
-	}
+	parameters := extract_parameters(args)
 
 	// now generate the array basiing on the number of arguments
 	if number_of_args == 1 {

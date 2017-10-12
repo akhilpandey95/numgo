@@ -1,7 +1,9 @@
-# numGo
-N A library inspired to provide methods and functions that
+# numgo
+A library that is aimed at providing methods and functions that
 give scope for performing numerical and scientific calculations
-in `go-lang`
+in `go-lang`. The core concept to `numgo` library is that everything
+is an array and all operations, calculations, functions and routines
+that correspond to are in reference to that `n-dimensional` array.
 
 # Inspiration
 Inspired by `numpy` for `python`, `numGo` aims to replicate all the
