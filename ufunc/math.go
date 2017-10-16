@@ -8,37 +8,113 @@ package numgo
 
 import (
 	"math"
+	"strings"
 )
 
-func Sin(args ...int) []float64 {
+func Sin(measure string, args ...int) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
+	measure = strings.ToLower(measure)
 
 	// check the args and return the appropriate function result
-	for i := 0; i < len(parameters); i++ {
-		result = append(result, math.Sin(math.Pi*float64(parameters[i])/180))
+	if strings.HasPrefix(measure, "d") || strings.Contains(measure, "deg") {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, math.Sin(math.Pi*float64(parameters[i])/180))
+		}
+	} else {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, math.Sin(float64(parameters[i])))
+		}
 	}
 	return result
 }
 
-func Cos(args ...int) []float64 {
+func Cos(measure string, args ...int) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
+	measure = strings.ToLower(measure)
 
 	// check the args and return the appropriate function result
-	for i := 0; i < len(parameters); i++ {
-		result = append(result, math.Cos(math.Pi*float64(parameters[i])/180))
+	if strings.HasPrefix(measure, "d") || strings.Contains(measure, "deg") {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, math.Cos(math.Pi*float64(parameters[i])/180))
+		}
+	} else {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, math.Cos(float64(parameters[i])))
+		}
 	}
 	return result
 }
 
-func Tan(args ...int) []float64 {
+func Tan(measure string, args ...int) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
+	measure = strings.ToLower(measure)
 
 	// check the args and return the appropriate function result
-	for i := 0; i < len(parameters); i++ {
-		result = append(result, math.Tan(math.Pi*float64(parameters[i])/180))
+	if strings.HasPrefix(measure, "d") || strings.Contains(measure, "deg") {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, math.Tan(math.Pi*float64(parameters[i])/180))
+		}
+	} else {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, math.Tan(float64(parameters[i])))
+		}
+	}
+	return result
+}
+
+func Cosec(measure string, args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+	measure = strings.ToLower(measure)
+
+	// check the args and return the appropriate function result
+	if strings.HasPrefix(measure, "d") || strings.Contains(measure, "deg") {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, (1 / math.Sin(math.Pi*float64(parameters[i])/180)))
+		}
+	} else {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, (1 / math.Sin(float64(parameters[i]))))
+		}
+	}
+	return result
+}
+
+func Sec(measure string, args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+	measure = strings.ToLower(measure)
+
+	// check the args and return the appropriate function result
+	if strings.HasPrefix(measure, "d") || strings.Contains(measure, "deg") {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, (1 / math.Cos(math.Pi*float64(parameters[i])/180)))
+		}
+	} else {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, (1 / math.Cos(float64(parameters[i]))))
+		}
+	}
+	return result
+}
+
+func Cot(measure string, args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+	measure = strings.ToLower(measure)
+
+	// check the args and return the appropriate function result
+	if strings.HasPrefix(measure, "d") || strings.Contains(measure, "deg") {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, (1 / math.Tan(math.Pi*float64(parameters[i])/180)))
+		}
+	} else {
+		for i := 0; i < len(parameters); i++ {
+			result = append(result, (1 / math.Tan(float64(parameters[i]))))
+		}
 	}
 	return result
 }
