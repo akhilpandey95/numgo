@@ -43,6 +43,39 @@ func Tan(args ...int) []float64 {
 	return result
 }
 
+func Asin(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Asin(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
+func Acos(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Acos(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
+func Atan(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Atan(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
 func Sinh(args ...int) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
@@ -75,6 +108,40 @@ func Tanh(args ...int) []float64 {
 	}
 	return result
 }
+
+func Asinh(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Asinh(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
+func Acosh(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Acosh(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
+func Atanh(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Atanh(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
 func Sqrt(args ...int) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
