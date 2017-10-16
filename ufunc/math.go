@@ -42,3 +42,46 @@ func Tan(args ...int) []float64 {
 	}
 	return result
 }
+
+func Sinh(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Sinh(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
+func Cosh(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Cosh(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+
+func Tanh(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Tanh(math.Pi*float64(parameters[i])/180))
+	}
+	return result
+}
+func Sqrt(args ...int) []float64 {
+	var result []float64
+	parameters := extract_parameters(args)
+
+	// check the args and return the appropriate function result
+	for i := 0; i < len(parameters); i++ {
+		result = append(result, math.Sqrt(float64(parameters[i])))
+	}
+	return result
+}
