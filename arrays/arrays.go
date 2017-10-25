@@ -10,13 +10,13 @@ type NdArray struct {
 	Size int
 }
 
-func (n NdArray) Init() []int {
-	array := make([]int, n.Size)
+func (n NdArray) Init() []float64 {
+	array := make([]float64, n.Size)
 	return array
 }
 
-func extract_parameters(args []int) []int {
-	var parameters []int
+func extract_parameters(args []float64) []float64 {
+	var parameters []float64
 
 	// store the parameters in a list
 	for _, p := range args {
@@ -32,30 +32,31 @@ func (n NdArray) Array(data []string, details ...int) (narray *NdArray) {
 	return narray
 }
 
-func (n NdArray) Range(start, end int) []int {
-	var array []int
+func (n NdArray) Range(start, end float64) []float64 {
+	var array []float64
 	for i := start; i < end; i++ {
 		array = append(array, i)
 	}
 	return array
 }
 
-func (n NdArray) Xrange(args ...int) []int {
-	var array []int
+func (n NdArray) Xrange(args ...float64) []float64 {
+	var i float64
+	var array []float64
 	number_of_args := len(args)
 	parameters := extract_parameters(args)
 
 	// now generate the array basiing on the number of arguments
 	if number_of_args == 1 {
-		for i := 0; i < parameters[0]; i++ {
+		for i = 0; i < parameters[0]; i++ {
 			array = append(array, i)
 		}
 	} else if number_of_args == 2 {
-		for i := parameters[0]; i < parameters[1]; i++ {
+		for i = parameters[0]; i < parameters[1]; i++ {
 			array = append(array, i)
 		}
 	} else {
-		for i := parameters[0]; i < parameters[1]; i++ {
+		for i = parameters[0]; i < parameters[1]; i++ {
 			array = append(array, i)
 		}
 	}

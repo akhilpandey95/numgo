@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-func Sin(measure string, args ...int) []float64 {
+func Sin(measure string, args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 	measure = strings.ToLower(measure)
@@ -29,7 +29,7 @@ func Sin(measure string, args ...int) []float64 {
 	return result
 }
 
-func Cos(measure string, args ...int) []float64 {
+func Cos(measure string, args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 	measure = strings.ToLower(measure)
@@ -47,7 +47,7 @@ func Cos(measure string, args ...int) []float64 {
 	return result
 }
 
-func Tan(measure string, args ...int) []float64 {
+func Tan(measure string, args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 	measure = strings.ToLower(measure)
@@ -65,7 +65,7 @@ func Tan(measure string, args ...int) []float64 {
 	return result
 }
 
-func Cosec(measure string, args ...int) []float64 {
+func Cosec(measure string, args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 	measure = strings.ToLower(measure)
@@ -83,7 +83,7 @@ func Cosec(measure string, args ...int) []float64 {
 	return result
 }
 
-func Sec(measure string, args ...int) []float64 {
+func Sec(measure string, args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 	measure = strings.ToLower(measure)
@@ -101,7 +101,7 @@ func Sec(measure string, args ...int) []float64 {
 	return result
 }
 
-func Cot(measure string, args ...int) []float64 {
+func Cot(measure string, args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 	measure = strings.ToLower(measure)
@@ -119,7 +119,7 @@ func Cot(measure string, args ...int) []float64 {
 	return result
 }
 
-func Asin(args ...int) []float64 {
+func Asin(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -130,7 +130,7 @@ func Asin(args ...int) []float64 {
 	return result
 }
 
-func Acos(args ...int) []float64 {
+func Acos(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -141,7 +141,7 @@ func Acos(args ...int) []float64 {
 	return result
 }
 
-func Atan(args ...int) []float64 {
+func Atan(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -152,7 +152,7 @@ func Atan(args ...int) []float64 {
 	return result
 }
 
-func Sinh(args ...int) []float64 {
+func Sinh(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -163,7 +163,7 @@ func Sinh(args ...int) []float64 {
 	return result
 }
 
-func Cosh(args ...int) []float64 {
+func Cosh(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -174,7 +174,7 @@ func Cosh(args ...int) []float64 {
 	return result
 }
 
-func Tanh(args ...int) []float64 {
+func Tanh(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -185,7 +185,7 @@ func Tanh(args ...int) []float64 {
 	return result
 }
 
-func Asinh(args ...int) []float64 {
+func Asinh(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -196,7 +196,7 @@ func Asinh(args ...int) []float64 {
 	return result
 }
 
-func Acosh(args ...int) []float64 {
+func Acosh(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -207,7 +207,7 @@ func Acosh(args ...int) []float64 {
 	return result
 }
 
-func Atanh(args ...int) []float64 {
+func Atanh(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 
@@ -218,7 +218,7 @@ func Atanh(args ...int) []float64 {
 	return result
 }
 
-func Sqrt(args ...int) []float64 {
+func Sqrt(args ...float64) []float64 {
 	var result []float64
 	parameters := extract_parameters(args)
 

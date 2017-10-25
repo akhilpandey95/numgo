@@ -10,8 +10,8 @@ import (
 	"log"
 )
 
-func extract_parameters(args []int) []int {
-	var parameters []int
+func extract_parameters(args []float64) []float64 {
+	var parameters []float64
 
 	// store the parameters in a slice
 	for _, p := range args {
@@ -20,7 +20,7 @@ func extract_parameters(args []int) []int {
 	return parameters
 }
 
-func Equal(array_one, array_two []int) []bool {
+func Equal(array_one, array_two []float64) []bool {
 	var result []bool
 
 	// check the args and return the appropriate function result
@@ -38,7 +38,7 @@ func Equal(array_one, array_two []int) []bool {
 	return result
 }
 
-func Not_Equal(array_one, array_two []int) []bool {
+func Not_Equal(array_one, array_two []float64) []bool {
 	var result []bool
 
 	// check the args and return the appropriate function result
@@ -56,8 +56,8 @@ func Not_Equal(array_one, array_two []int) []bool {
 	return result
 }
 
-func Greater(array_one, array_two []int) []int {
-	var result []int
+func Greater(array_one, array_two []float64) []float64 {
+	var result []float64
 
 	// check the args and return the appropriate function result
 	if len(array_one) != len(array_two) {
@@ -74,7 +74,7 @@ func Greater(array_one, array_two []int) []int {
 	return result
 }
 
-func Greater_B(array_one, array_two []int) []bool {
+func Greater_B(array_one, array_two []float64) []bool {
 	var result []bool
 
 	// check the args and return the appropriate function result
@@ -92,8 +92,8 @@ func Greater_B(array_one, array_two []int) []bool {
 	return result
 }
 
-func Lesser(array_one, array_two []int) []int {
-	var result []int
+func Lesser(array_one, array_two []float64) []float64 {
+	var result []float64
 
 	//check the args and return the appropriate function result
 	if len(array_one) != len(array_two) {
@@ -110,7 +110,7 @@ func Lesser(array_one, array_two []int) []int {
 	return result
 }
 
-func Lesser_B(array_one, array_two []int) []bool {
+func Lesser_B(array_one, array_two []float64) []bool {
 	var result []bool
 
 	//check the args and return the appropriate function result
