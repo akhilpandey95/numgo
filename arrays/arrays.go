@@ -25,6 +25,13 @@ func extract_parameters(args []int) []int {
 	return parameters
 }
 
+func (n NdArray) Array(data []string, details ...int) (narray *NdArray) {
+	//parameters := extract_parameters(details)
+
+	// depending on the given parameters create the appropriate array
+	return narray
+}
+
 func (n NdArray) Range(start, end int) []int {
 	var array []int
 	for i := start; i < end; i++ {
