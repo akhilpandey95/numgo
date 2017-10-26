@@ -10,9 +10,27 @@ type NdArray struct {
 	Size int
 }
 
+type NArray struct {
+	Data    []float64
+	Details []float64
+	Index   []float64
+}
+
 func (n NdArray) Init() []float64 {
 	array := make([]float64, n.Size)
 	return array
+}
+
+func extract_details(args []float64) ([]float64, float64) {
+	var elements float64 = 1
+	var parameters []float64
+
+	// store the parameters in a list
+	for _, p := range args {
+		parameters = append(parameters, p)
+		elements *= p
+	}
+	return parameters, elements
 }
 
 func extract_parameters(args []float64) []float64 {
@@ -25,11 +43,31 @@ func extract_parameters(args []float64) []float64 {
 	return parameters
 }
 
-func (n NdArray) Array(data []string, details ...int) (narray *NdArray) {
-	//parameters := extract_parameters(details)
+func Array(data []float64, details ...float64) (res *NArray) {
+	parameters, elements := extract_details(details)
 
-	// depending on the given parameters create the appropriate array
-	return narray
+	// depending on the parameters return the appropriate array
+	if len(parameters) == 0 {
+		return &NArray{
+			Data:    []float64{},
+			Details: []float64{0, 0},
+			Index:   []float64{0, 0},
+		}
+	}
+	res = &NArray{
+		Data:    make([]float64, int(elements)),
+		Details: parameters,
+		Index:   make([]float64, len(details)+1),
+	}
+	if data != nil {
+		copy(res.Data[:], data)
+	} else {
+		res.Index[len(details)] = 1
+		for i := len(details) - 1; i >= 0; i-- {
+			res.Index[i] = res.Index[i+1] * res.Details[i]
+		}
+	}
+	return res
 }
 
 func (n NdArray) Range(start, end float64) []float64 {
