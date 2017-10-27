@@ -65,3 +65,24 @@ func Strtolower(array_one []string) []string {
 	}
 	return result
 }
+
+func Strcapitalize(array_one []string) []string {
+	var result []string
+
+	//take the args and capitalize every element of the given string array
+	for i := 0; i < len(array_one); i++ {
+		result = append(result, strings.Title(array_one[i]))
+	}
+	return result
+}
+
+func Strcontains(array_one []string, args ...string) []bool {
+	var result []bool
+	str_args := extract_strings(args)
+
+	//check if the given string/character is present in every element of the array
+	for i := 0; i < len(array_one); i++ {
+		result = append(result, strings.Contains(array_one[i], str_args[0]))
+	}
+	return result
+}
