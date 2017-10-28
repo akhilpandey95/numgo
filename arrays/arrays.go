@@ -43,31 +43,19 @@ func extract_parameters(args []float64) []float64 {
 	return parameters
 }
 
-func Array(data []float64, details ...float64) (res *NArray) {
-	parameters, elements := extract_details(details)
-
-	// depending on the parameters return the appropriate array
-	if len(parameters) == 0 {
-		return &NArray{
-			Data:    []float64{},
-			Details: []float64{0, 0},
-			Index:   []float64{0, 0},
+func NDArray(details ...float64) []float64 {
+	parameters := extract_parameters(details)
+	if len(parameters) > 0 {
+		dim := parameters[0]
+		rem := parameters[1:]
+		arr := []float64{}
+		for i := 0; i < int(dim); i++ {
+			arr = append(arr, NDArray(rem...)...)
 		}
-	}
-	res = &NArray{
-		Data:    make([]float64, int(elements)),
-		Details: parameters,
-		Index:   make([]float64, len(details)+1),
-	}
-	if data != nil {
-		copy(res.Data[:], data)
+		return arr
 	} else {
-		res.Index[len(details)] = 1
-		for i := len(details) - 1; i >= 0; i-- {
-			res.Index[i] = res.Index[i+1] * res.Details[i]
-		}
+		return []float64{0}
 	}
-	return res
 }
 
 func (n NdArray) Range(start, end float64) []float64 {
