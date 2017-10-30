@@ -6,6 +6,10 @@
 
 package numgo
 
+import (
+	"fmt"
+)
+
 type NdArray struct {
 	Size int
 }
@@ -66,6 +70,16 @@ func NDArray(details ...float64) (n *NArray) {
 		Index:   make([]float64, len(parameters)),
 	}
 	return n
+}
+
+func (n *NArray) String() string {
+	var array string = "numgo.NDArray("
+	if len(n.Details) == 0 {
+		array += "<nil>"
+	}
+	array += fmt.Sprintf("%v", n.Data) + ")"
+
+	return array
 }
 
 func (n NdArray) Range(start, end float64) []float64 {
