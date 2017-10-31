@@ -8,6 +8,7 @@ package numgo
 
 import (
 	"fmt"
+	"strings"
 )
 
 type NdArray struct {
@@ -25,18 +26,6 @@ func (n NdArray) Init() []float64 {
 	return array
 }
 
-func extract_details(args []float64) ([]float64, float64) {
-	var elements float64 = 1
-	var parameters []float64
-
-	// store the parameters in a list
-	for _, p := range args {
-		parameters = append(parameters, p)
-		elements *= p
-	}
-	return parameters, elements
-}
-
 func extract_parameters(args []float64) []float64 {
 	var parameters []float64
 
@@ -47,39 +36,80 @@ func extract_parameters(args []float64) []float64 {
 	return parameters
 }
 
-func NDArrayGenElements(details ...float64) []float64 {
+func NDArrayGenElements(value float64, details ...float64) []float64 {
 	parameters := extract_parameters(details)
 	if len(parameters) > 0 {
 		dim := parameters[0]
 		rem := parameters[1:]
 		arr := []float64{}
 		for i := 0; i < int(dim); i++ {
-			arr = append(arr, NDArrayGenElements(rem...)...)
+			arr = append(arr, NDArrayGenElements(value, rem...)...)
 		}
 		return arr
 	} else {
-		return []float64{0}
+		return []float64{value}
 	}
 }
 
 func NDArray(details ...float64) (n *NArray) {
 	parameters := extract_parameters(details)
 	n = &NArray{
-		Data:    NDArrayGenElements(details...),
+		Data:    NDArrayGenElements(0, details...),
 		Details: parameters,
 		Index:   make([]float64, len(parameters)),
 	}
 	return n
 }
 
-func (n *NArray) String() string {
-	var array string = "numgo.NDArray("
+func (n *NArray) String() (array string) {
+	array = "NDArray>\n("
 	if len(n.Details) == 0 {
-		array += "<nil>"
-	}
-	array += fmt.Sprintf("%v", n.Data) + ")"
+		return "NDArray>(<nil>)"
+	} else {
+		var i float64 = 0
+		var details []float64
+		var index_number float64 = n.Details[len(n.Details)-1]
+		var element float64 = index_number
 
-	return array
+		// store the rows and cols number for adding [ and ] symbols
+		// at appropriate places
+		for index := len(n.Details) - 1; index > 0; index-- {
+			details = append(details, index_number*n.Details[index-1])
+			index_number = index_number * n.Details[index-1]
+		}
+		for i = 0; i + element <= float64(len(n.Data)); i += element {
+			var array_symbol string = ""
+			// add the '[' symbol at the start of every new dimension
+			for _, d := range details {
+				if int(i)%int(d) == 0 {
+					array_symbol += "["
+				}
+			}
+			array += strings.Repeat(" ", len(n.Details)-len(array_symbol) - 1) + array_symbol
+
+			// add the data between the '[' ']' symbols
+			array += fmt.Sprint(n.Data[int(i):int(i + element)])
+
+			array_symbol = ""
+
+			// add the ']' symbol at the end of every new dimension
+			for _, d := range details {
+				if int((i + element))%int(d) == 0 {
+					array_symbol += "]"
+				}
+			}
+			array += array_symbol + strings.Repeat(" ", (len(n.Details)- len(array_symbol)) - 1)
+
+			// add proper spacing for displaying arrays in presentable manner
+			if i + element != float64(len(n.Data)) {
+				if len(array_symbol) > 0 {
+					array += "\n"
+				}
+				array += "\n"
+			}
+		}
+	}
+	return array + ")"
 }
 
 func (n NdArray) Range(start, end float64) []float64 {
