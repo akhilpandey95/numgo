@@ -1,8 +1,6 @@
 # go test files
 test.go
-main.go
 */test.go
-*/main.go
 
 # swp files
 *.swp
