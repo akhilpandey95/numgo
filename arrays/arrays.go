@@ -11,19 +11,19 @@ import (
 	"strings"
 )
 
-type NdArray struct {
-	Size int
-}
-
 type NArray struct {
 	Data    []float64
 	Details []float64
 	Index   []float64
 }
 
-func (n NdArray) Init() []float64 {
-	array := make([]float64, n.Size)
-	return array
+func Init(length float64) (n *NArray) {
+	n = &NArray{
+		Data:    make([]float64, 0),
+		Details: []float64{1, length},
+		Index:   make([]float64, 2),
+	}
+	return n
 }
 
 func extract_parameters(args []float64) []float64 {
@@ -54,7 +54,7 @@ func NDArrayGenElements(value float64, details ...float64) []float64 {
 func NDArray(details ...float64) (n *NArray) {
 	parameters := extract_parameters(details)
 	n = &NArray{
-		Data:    NDArrayGenElements(0, details...),
+		Data:    NDArrayGenElements(1, details...),
 		Details: parameters,
 		Index:   make([]float64, len(parameters)),
 	}
@@ -112,33 +112,35 @@ func (n *NArray) String() (array string) {
 	return array + ")"
 }
 
-func (n NdArray) Range(start, end float64) []float64 {
-	var array []float64
+func Range(start, end float64) (n *NArray) {
+	n = Init(end - start)
 	for i := start; i < end; i++ {
-		array = append(array, i)
+		n.Data = append(n.Data, i)
 	}
-	return array
+	return n
 }
 
-func (n NdArray) Xrange(args ...float64) []float64 {
+func Xrange(args ...float64) (n *NArray) {
 	var i float64
-	var array []float64
 	number_of_args := len(args)
 	parameters := extract_parameters(args)
 
 	// now generate the array basiing on the number of arguments
 	if number_of_args == 1 {
+		n = Init(parameters[0])
 		for i = 0; i < parameters[0]; i++ {
-			array = append(array, i)
+			n.Data = append(n.Data, i)
 		}
 	} else if number_of_args == 2 {
+		n = Init(parameters[1] - parameters[0])
 		for i = parameters[0]; i < parameters[1]; i++ {
-			array = append(array, i)
+			n.Data = append(n.Data, i)
 		}
 	} else {
+		n = Init(parameters[1] - parameters[0])
 		for i = parameters[0]; i < parameters[1]; i++ {
-			array = append(array, i)
+			n.Data = append(n.Data, i)
 		}
 	}
-	return array
+	return n
 }
