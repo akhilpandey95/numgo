@@ -8,6 +8,7 @@ package numgo
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
@@ -24,6 +25,20 @@ func Init(length float64) (n *NArray) {
 		Index:   make([]float64, 2),
 	}
 	return n
+}
+
+func Round(number, decimal, precision float64) float64 {
+	var result float64
+	var zeros float64 = math.Pow(10, precision)
+	var new_number float64 = zeros * number
+	_, mod_decimal := math.Modf(new_number)
+	if mod_decimal >= decimal {
+		result = math.Ceil(new_number)
+	} else {
+		result = math.Floor(new_number)
+	}
+	result /= zeros
+	return result
 }
 
 func extract_parameters(args []float64) []float64 {
@@ -54,7 +69,7 @@ func NDArrayGenElements(value float64, details ...float64) []float64 {
 func NDArray(details ...float64) (n *NArray) {
 	parameters := extract_parameters(details)
 	n = &NArray{
-		Data:    NDArrayGenElements(1, details...),
+		Data:    NDArrayGenElements(0, details...),
 		Details: parameters,
 		Index:   make([]float64, len(parameters)),
 	}
@@ -77,7 +92,7 @@ func (n *NArray) String() (array string) {
 			details = append(details, index_number*n.Details[index-1])
 			index_number = index_number * n.Details[index-1]
 		}
-		for i = 0; i + element <= float64(len(n.Data)); i += element {
+		for i = 0; i+element <= float64(len(n.Data)); i += element {
 			var array_symbol string = ""
 			// add the '[' symbol at the start of every new dimension
 			for _, d := range details {
@@ -85,27 +100,31 @@ func (n *NArray) String() (array string) {
 					array_symbol += "["
 				}
 			}
-			array += strings.Repeat(" ", len(n.Details)-len(array_symbol) - 1) + array_symbol
+			array += strings.Repeat(" ", len(n.Details)-len(array_symbol)-1) + array_symbol
 
 			// add the data between the '[' ']' symbols
-			array += fmt.Sprint(n.Data[int(i):int(i + element)])
+			array += fmt.Sprint(n.Data[int(i):int(i+element)])
 
 			array_symbol = ""
 
 			// add the ']' symbol at the end of every new dimension
 			for _, d := range details {
-				if int((i + element))%int(d) == 0 {
+				if int((i+element))%int(d) == 0 {
 					array_symbol += "]"
 				}
 			}
-			array += array_symbol + strings.Repeat(" ", (len(n.Details)- len(array_symbol)) - 1)
+			array += array_symbol + strings.Repeat(" ", (len(n.Details)-len(array_symbol))-1)
 
 			// add proper spacing for displaying arrays in presentable manner
-			if i + element != float64(len(n.Data)) {
-				if len(array_symbol) > 0 {
+			if i+element != float64(len(n.Data)) {
+				if n.Details[0] == 1 && len(n.Details) == 2 {
+					array += ""
+				} else {
+					if len(array_symbol) > 0 {
+						array += "\n"
+					}
 					array += "\n"
 				}
-				array += "\n"
 			}
 		}
 	}
@@ -136,10 +155,20 @@ func Xrange(args ...float64) (n *NArray) {
 		for i = parameters[0]; i < parameters[1]; i++ {
 			n.Data = append(n.Data, i)
 		}
+	} else if number_of_args == 3 {
+		n = Init((parameters[1] - parameters[0]) / parameters[2])
+		for i = parameters[0]; i < parameters[1]; i += parameters[2] {
+			n.Data = append(n.Data, Round(i, 0.5, 1))
+		}
+	} else if number_of_args == 4 {
+		n = Init((parameters[1] - parameters[0]) / parameters[2])
+		for i = parameters[0]; i < parameters[1]; i += parameters[2] {
+			n.Data = append(n.Data, Round(i, 0.5, parameters[3]))
+		}
 	} else {
-		n = Init(parameters[1] - parameters[0])
-		for i = parameters[0]; i < parameters[1]; i++ {
-			n.Data = append(n.Data, i)
+		n = Init((parameters[1] - parameters[0]) / parameters[2])
+		for i = parameters[0]; i < parameters[1]; i += parameters[2] {
+			n.Data = append(n.Data, Round(i, 0.5, 1))
 		}
 	}
 	return n
