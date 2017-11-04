@@ -165,6 +165,17 @@ func (n *NArray) GetElement(details ...float64) float64 {
 	}
 }
 
+func (n *NArray) SetElement(details []float64, value float64) *NArray {
+	var result float64
+	if int(GetIndex(n, details...)) < len(n.Data) {
+		result = GetIndex(n, details...)
+		n.Data[int(result)] = value
+	} else {
+		log.Fatal("Incorrect Shape passed as an argument")
+	}
+	return n
+}
+
 func Range(start, end float64) (n *NArray) {
 	n = Init(end - start)
 	for i := start; i < end; i++ {
