@@ -8,6 +8,7 @@ package numgo
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"strings"
 )
@@ -39,6 +40,28 @@ func Round(number, decimal, precision float64) float64 {
 	}
 	result /= zeros
 	return result
+}
+
+func RowColFormula(details []float64) float64 {
+	var result float64 = 1
+	for x := 0; x < len(details); x++ {
+		result *= details[x]
+	}
+	return result
+}
+
+func GetIndex(n *NArray, details ...float64) float64 {
+	var result float64 = 0
+	parameters := extract_parameters(details)
+	if len(parameters) == len(n.Details) {
+		for x := 0; x < len(n.Details); x++ {
+			result += parameters[x] * RowColFormula(n.Details[x+1:])
+		}
+		return result
+	} else {
+		log.Fatal("incorrect shape given as index")
+		return -1
+	}
 }
 
 func extract_parameters(args []float64) []float64 {
@@ -129,6 +152,17 @@ func (n *NArray) String() (array string) {
 		}
 	}
 	return array + ")"
+}
+
+func (n *NArray) GetElement(details ...float64) float64 {
+	var result float64
+	if int(GetIndex(n, details...)) < len(n.Data) {
+		result = GetIndex(n, details...)
+		return n.Data[int(result)]
+	} else {
+		log.Fatal("Incorrect Shape passed as an argument")
+		return -1
+	}
 }
 
 func Range(start, end float64) (n *NArray) {
