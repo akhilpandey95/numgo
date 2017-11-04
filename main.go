@@ -176,6 +176,17 @@ func (n *NArray) SetElement(details []float64, value float64) *NArray {
 	return n
 }
 
+func (n *NArray) FillElements(values []float64) *NArray {
+	if len(n.Data) > len(values) {
+		for i := 0; i < len(values); i++ {
+			n.Data[i] = values[i]
+		}
+	} else {
+		log.Fatal("Cannot accomodate the NArray with the given size of values")
+	}
+	return n
+}
+
 func Range(start, end float64) (n *NArray) {
 	n = Init(end - start)
 	for i := start; i < end; i++ {
