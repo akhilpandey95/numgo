@@ -207,19 +207,40 @@ func Xrange(args ...float64) (n *NArray) {
 			n.Data = append(n.Data, i)
 		}
 	} else if number_of_args == 2 {
-		n = Init(parameters[1] - parameters[0])
-		for i = parameters[0]; i < parameters[1]; i++ {
-			n.Data = append(n.Data, i)
+		if parameters[1] > parameters[0] {
+			n = Init(parameters[1] - parameters[0])
+			for i = parameters[0]; i < parameters[1]; i++ {
+				n.Data = append(n.Data, i)
+			}
+		} else {
+			n = Init(parameters[0] - parameters[1])
+			for i = parameters[0]; i > parameters[1]; i-- {
+				n.Data = append(n.Data, i)
+			}
 		}
 	} else if number_of_args == 3 {
-		n = Init((parameters[1] - parameters[0]) / parameters[2])
-		for i = parameters[0]; i < parameters[1]; i += parameters[2] {
-			n.Data = append(n.Data, Round(i, 0.5, 1))
+		if parameters[1] > parameters[0] {
+			n = Init((parameters[1] - parameters[0]) / parameters[2])
+			for i = parameters[0]; i < parameters[1]; i += parameters[2] {
+				n.Data = append(n.Data, Round(i, 0.5, 1))
+			}
+		} else {
+			n = Init((parameters[0] - parameters[1]) / parameters[2])
+			for i = parameters[0]; i > parameters[1]; i -= parameters[2] {
+				n.Data = append(n.Data, Round(i, 0.5, 1))
+			}
 		}
 	} else if number_of_args == 4 {
-		n = Init((parameters[1] - parameters[0]) / parameters[2])
-		for i = parameters[0]; i < parameters[1]; i += parameters[2] {
-			n.Data = append(n.Data, Round(i, 0.5, parameters[3]))
+		if parameters[1] > parameters[0] {
+			n = Init((parameters[1] - parameters[0]) / parameters[2])
+			for i = parameters[0]; i < parameters[1]; i += parameters[2] {
+				n.Data = append(n.Data, Round(i, 0.5, parameters[3]))
+			}
+		} else {
+			n = Init((parameters[0] - parameters[1]) / parameters[2])
+			for i = parameters[0]; i > parameters[1]; i -= parameters[2] {
+				n.Data = append(n.Data, Round(i, 0.5, parameters[3]))
+			}
 		}
 	} else {
 		n = Init((parameters[1] - parameters[0]) / parameters[2])
