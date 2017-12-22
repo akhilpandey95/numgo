@@ -18,6 +18,11 @@ of the concepts and ideas are broadly taken from `numpy`.
 - Universal Functions
 - Logical Functions
 
+# Installation
+```shell
+go get github.com/akhilpandey95/numgo
+```
+
 # Usage
 ```go
 package main
@@ -35,13 +40,13 @@ func main() {
 ```
 
 # Methods
-- `linalg/vectors`         - Vectors, matrices and eigen values
-- `ufunc/math`             - Trignometric and mathematical operations on NDArrays
-- `ufunc/strings`          - Operations supporting string operations
-- `ufunc/comparision`      - Comparing two NDArrays as to which is Greater, Smaller etc
-- `routines/random`        - Generation of Random Numbers on NDArrays and operations on them
-- `routines/sampling`      - Sampling array data of type NDArray
-- `routines/distributions` - Various Mathematical Distributions on NDArray data
+- [linalg/vectors](https://github.com/akhilpandey95/numGo/blob/master/linalg/README.md)         - Vectors, matrices and eigen values
+- [ufunc/math](https://github.com/akhilpandey95/numGo/blob/master/ufunc/README.md)             - Trignometric and mathematical operations on NDArrays
+- [ufunc/strings](https://github.com/akhilpandey95/numGo/blob/master/ufunc/README.md)        - Operations supporting string operations
+- [ufunc/comparision](https://github.com/akhilpandey95/numGo/blob/master/ufunc/README.md)      - Comparing two NDArrays as to which is Greater, Smaller etc
+- [routines/random](https://github.com/akhilpandey95/numGo/blob/master/routines/README.md)        - Generation of Random Numbers on NDArrays and operations on them
+- [routines/sampling](https://github.com/akhilpandey95/numGo/blob/master/routines/README.md)      - Sampling array data of type NDArray
+- [routines/distributions](https://github.com/akhilpandey95/numGo/blob/master/routines/README.md) - Various Mathematical Distributions on NDArray data
 
 `NOTE:` The package in its entirety is under development `v0.1` will be shipped by the end of December 2017.
 
