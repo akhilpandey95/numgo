@@ -9,7 +9,10 @@ language: go
 go:
     - 1.9
 
-install: true
+install: true 
+
+script:
+    - go test -v ./...
 
 notifications:
     email: true

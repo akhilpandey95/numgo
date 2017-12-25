@@ -10,16 +10,6 @@ import (
 	"log"
 )
 
-func extract_parameters(args []float64) []float64 {
-	var parameters []float64
-
-	// store the parameters in a slice
-	for _, p := range args {
-		parameters = append(parameters, p)
-	}
-	return parameters
-}
-
 func Equal(array_one, array_two []float64) []bool {
 	var result []bool
 
