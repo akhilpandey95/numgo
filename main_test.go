@@ -7,7 +7,6 @@
 package numgo
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -76,8 +75,6 @@ func TestXrange(t *testing.T) {
 
 	// check the values for the first array
 	if !(reflect.DeepEqual(input_one.Data, output_one)) {
-		fmt.Println(input_one.Data)
-		//fmt.Println(numgo.Xrange(10, 11, 0.1))
 		t.Errorf("Contents of Array must be %v, but got %v\n", output_one, input_one.Data)
 	}
 

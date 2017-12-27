@@ -1,4 +1,4 @@
-# numgo
+# numgo ![Build Status](https://travis-ci.org/akhilpandey95/numgo.svg?branch=test-master)
 A library that is aimed at providing methods and functions that
 give scope for performing numerical and scientific calculations
 in `go-lang`. The core concept to `numgo` library is that everything
